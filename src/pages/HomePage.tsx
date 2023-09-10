@@ -2,11 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
 import Loader from '../styles/Loader';
+import { motion } from 'framer-motion'
+
 
 const Container = styled.div`
-  max-width: 1200px;
+  max-width: 1000px;
   margin: 0 auto;
   padding: 1rem;
+  background-color: ${(props) => props.theme.background};
+  z-index: 3;
 `;
 
 const SearchInput = styled.input`
@@ -24,15 +28,20 @@ const Grid = styled.div`
   gap: 1rem;
 `;
 
+const GridContainer = motion(Grid)
+
 const GridItem = styled(Link)`
   text-decoration: none;
 `;
 
+const MotionStyled = motion(GridItem)
+
 const Card = styled.div`
-  background-color: #282c34;
+  background-color: ${(props) => props.theme.body};
   border-radius: 8px;
   padding: 1rem;
   transition: transform 0.3s;
+  border: ${(props) => props.theme.border};
   &:hover {
     transform: scale(1.05);
   }
@@ -46,7 +55,7 @@ const CardImage = styled.img`
 `;
 
 const CardText = styled.p`
-  color: #fff;
+  color: ${(props) => props.theme.text};;
   text-align: center;
   margin-top: 0.5rem;
 `;
@@ -69,6 +78,22 @@ interface CharactersData {
     results: Character[];
   }
 
+const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        delayChildren: 0.5, // 모든 자식 애니메이션이 시작하기 전에 대기 시간
+        staggerChildren: 0.2, // 각 자식 애니메이션 사이의 시간 간격
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: -20 },
+    visible: { opacity: 1, y: 0 },
+  };
+
 function HomePage() {
   const [characters, setCharacters] = useState<Character[]>([]); 
   const [searchQuery, setSearchQuery] = useState('');
@@ -86,7 +111,7 @@ function HomePage() {
   }
 
   return (
-    <Container>
+        <Container>
       <SearchInput
         type="text"
         value={searchQuery}
@@ -94,11 +119,16 @@ function HomePage() {
         placeholder="Search for a character..."
       />
 
-      <Grid>
+      <GridContainer
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible">
         {characters
           .filter((character) => character.name.toLowerCase().includes(searchQuery.toLowerCase()))
           .map((character) => (
-            <GridItem key={character.id} to={`/character/${character.id}`}>
+            <MotionStyled
+                variants={itemVariants}
+                key={character.id} to={`/character/${character.id}`}>
               <Card>
                 <CardImage
                   src={`${character.thumbnail.path}.${character.thumbnail.extension}`}
@@ -106,9 +136,9 @@ function HomePage() {
                 />
                 <CardText>{character.name}</CardText>
               </Card>
-            </GridItem>
+            </MotionStyled>
           ))}
-      </Grid>
+      </GridContainer>
     </Container>
   );
 }

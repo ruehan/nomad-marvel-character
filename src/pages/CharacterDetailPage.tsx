@@ -1,34 +1,42 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useMatch, Route, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import Loader from '../styles/Loader';
+
 
 const Container = styled.div`
   max-width: 1000px;
   margin: 0 auto;
   padding: 1rem;
   display: flex;
+  background-color: ${(props) => props.theme.background};
 `;
 
 const Card = styled.div`
-  background-color: #282c34;
+  background-color: ${(props) => props.theme.body};
   border-radius: 8px;
   padding: 1rem;
   color: #fff;
   margin-right: 2rem; // 카드와 섹션 사이의 간격
   max-width: 600px;
+  color: ${(props) => props.theme.text};
 `;
 
 const Section = styled.div`
   flex: 1;
+  background-color: ${(props) => props.theme.body};
+  color: ${(props) => props.theme.text};
+  padding: 10px;
+  border-radius: 8px;
 `;
 
 const Image = styled.img`
   width: 100%;
-  height: 70vh;
+  height: 65vh;
   border-radius: 8px;
   object-fit: cover;
   margin-bottom: 1rem;
+
 `;
 
 
