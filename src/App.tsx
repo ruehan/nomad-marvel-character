@@ -9,6 +9,7 @@ import { ThemeProvider } from 'styled-components';
 import { darkTheme, lightTheme } from './utils/themes';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { darkMode } from './utils/atom';
+import { GlobalStyle } from './styles/GlobalStyle';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
   return (
     <>
       <ThemeProvider theme={darkmode ? darkTheme : lightTheme}>
+        <GlobalStyle />
         <BrowserRouter>
           <Header />
           <Routes>
