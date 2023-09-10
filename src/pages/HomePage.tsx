@@ -36,7 +36,7 @@ const GridItem = styled(Link)`
 
 const MotionStyled = motion(GridItem)
 
-const Card = styled.div`
+const Card = styled(motion.div)`
   background-color: ${(props) => props.theme.body};
   border-radius: 8px;
   padding: 1rem;
@@ -59,6 +59,19 @@ const CardText = styled.p`
   text-align: center;
   margin-top: 0.5rem;
 `;
+
+const TopButton = styled.button`
+    position: fixed;
+    bottom: 10%;
+    right: 5%;
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    color: ${(props) => props.theme.text};
+    background-color: ${(props) => props.theme.body};
+    border: ${(props) => props.theme.border};
+    cursor: pointer;
+`
 
 
 
@@ -129,7 +142,11 @@ function HomePage() {
             <MotionStyled
                 variants={itemVariants}
                 key={character.id} to={`/character/${character.id}`}>
-              <Card>
+              <Card
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.3 }}>
                 <CardImage
                   src={`${character.thumbnail.path}.${character.thumbnail.extension}`}
                   alt={character.name}
@@ -139,6 +156,7 @@ function HomePage() {
             </MotionStyled>
           ))}
       </GridContainer>
+      <TopButton onClick={() => window.scrollTo({top:0, behavior: "smooth"})}>Top</TopButton>
     </Container>
   );
 }
