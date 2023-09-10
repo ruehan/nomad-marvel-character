@@ -17,6 +17,7 @@ const HeaderContainer = styled.header`
   position: sticky;
   top: 0px;
   left: 0px;
+  z-index: 10;
 `;
 
 const Logo = styled.div`
