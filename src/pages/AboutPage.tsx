@@ -6,12 +6,15 @@ const AboutContainer = styled.div`
   margin: 0 auto;
   padding: 2rem;
   line-height: 1.6;
+  background-color: ${(props) => props.theme.body};
+  margin-top: 2rem;
+  
 `;
 
 const Header = styled.h1`
   font-size: 2.5rem;
   margin-bottom: 1rem;
-  color: #212121;
+  color: ${(props) => props.theme.text};
 `;
 
 const Section = styled.section`
@@ -22,12 +25,14 @@ const Subheader = styled.h2`
   font-size: 2rem;
   margin-bottom: 1rem;
   color: #424242;
+  color: ${(props) => props.theme.text};
 `;
 
 const Paragraph = styled.p`
   font-size: 1rem;
   margin-bottom: 1rem;
   color: #616161;
+  color: ${(props) => props.theme.text};
 `;
 
 const AboutPage = () => {
