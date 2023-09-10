@@ -142,11 +142,7 @@ function HomePage() {
             <MotionStyled
                 variants={itemVariants}
                 key={character.id} to={`/character/${character.id}`}>
-              <Card
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.3 }}>
+              <Card>
                 <CardImage
                   src={`${character.thumbnail.path}.${character.thumbnail.extension}`}
                   alt={character.name}
