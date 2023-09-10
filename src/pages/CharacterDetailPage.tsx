@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import Loader from '../styles/Loader';
+import {motion} from 'framer-motion'
 
-
-const Container = styled.div`
+const Container = styled(motion.div)`
   max-width: 1000px;
   margin: 0 auto;
   padding: 1rem;
@@ -95,7 +95,11 @@ interface Thumbnail {
     }
   
     return (
-        <Container>
+        <Container
+        initial={{ opacity: 0, scale: 0.1 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.5 }}
+      transition={{ duration: 0.6 }}>
         <Card>
           <Image src={`${characterDetail.thumbnail.path}.${characterDetail.thumbnail.extension}`} alt={characterDetail.name} />
           <h1>{characterDetail.name}</h1>
