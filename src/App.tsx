@@ -10,6 +10,7 @@ import { darkTheme, lightTheme } from './utils/themes';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { darkMode } from './utils/atom';
 import { GlobalStyle } from './styles/GlobalStyle';
+import { AnimatePresence } from 'framer-motion';
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
     <>
       <ThemeProvider theme={darkmode ? darkTheme : lightTheme}>
         <GlobalStyle />
+        <AnimatePresence >
         <BrowserRouter>
           <Header />
           <Routes>
@@ -30,6 +32,7 @@ function App() {
             <Route path="/about" Component={About}></Route>
           </Routes>
         </BrowserRouter>
+        </AnimatePresence>
       </ThemeProvider>
     </>
   );
